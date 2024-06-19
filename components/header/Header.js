@@ -5,7 +5,7 @@ import { NavLinks } from "@/components/header/NavLinks";
 const Header = () => {
   return (
     <header className="">
-      <div className="p-4 border-b border-primary/30 h-full items-center shadow-sm ">
+      <div className="p-4 border-b border-primary/30 flex h-full items-center shadow-sm ">
         <MobileNav />
         <NavLinks />
       </div>
