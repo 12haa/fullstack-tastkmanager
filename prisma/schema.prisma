@@ -71,7 +71,7 @@ model Project {
   name        String
   color       String
   notes       String
-  proiority   String
+  priority    String
   createdById String?
   createdBy   User?    @relation(fields: [createdById], references: [email])
   Task        Task[]

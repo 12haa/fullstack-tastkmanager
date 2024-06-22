@@ -7,6 +7,7 @@ const ColorPicker = ({onSelectColor, defaultValue}) => {
     useEffect(() => {
         setSelectedColor(defaultValue)
     }, [defaultValue]);
+
     const handleColorClick = (color) => {
         setSelectedColor(color)
         onSelectColor(color)
