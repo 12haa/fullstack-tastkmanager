@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { auth, signIn } from "@/auth";
 import { Button } from "@nextui-org/react";
 import { redirect } from "next/navigation";
 
 const HomePage = async () => {
+  const [theme, setTheme] = useState(true);
+
   const session = await auth();
   const user = session?.user;
   if (user) redirect("/dashboard");

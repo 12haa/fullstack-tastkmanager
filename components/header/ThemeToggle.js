@@ -3,10 +3,12 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Switch } from "@nextui-org/react";
 import { FiSun, FiMoon } from "react-icons/fi";
+import { bool } from "yup";
 
 const ThemeToggle = () => {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme, resolvedTheme } = useTheme();
+  Boolean;
   const handleToggle = () => {
     setTheme(resolvedTheme === "light" ? "dark" : "light");
   };
