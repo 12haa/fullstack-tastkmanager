@@ -1,13 +1,14 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import { FiArrowLeft, FiEdit } from "react-icons/fi";
+import { FiArrowLeft, FiEdit, FiTrash } from "react-icons/fi";
 import * as yup from "yup";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import updateProject from "@/lib/actions/project/update-project";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { Button, Input } from "@nextui-org/react";
+import deleteProject from "@/lib/actions/project/delete-project";
 
 const schema = yup.object().shape({
   name: yup.string().required("Project name is required"),
@@ -24,6 +25,7 @@ const UpdateProjectNameForm = ({ project }) => {
       name: project.name,
     },
   });
+  // Update Project Handler
   const onSubmit = async (data) => {
     try {
       await updateProject(project.id, { ...data });
@@ -40,6 +42,20 @@ const UpdateProjectNameForm = ({ project }) => {
   const toggleEditing = () => {
     setIsEditing((current) => !current);
     reset({ name: project.name });
+  };
+  // Delete Project Handler
+  const handleDelete = async () => {
+    setDeleting(true);
+    try {
+      await deleteProject(project.id);
+      toast("Project deleted successfully");
+      window.location.href = "/dashboard";
+    } catch (err) {
+      console.log(err);
+      toast("Failed to delete project");
+    } finally {
+      setDeleting(false);
+    }
   };
   return (
     <nav className="w-full">
@@ -76,7 +92,11 @@ const UpdateProjectNameForm = ({ project }) => {
             </div>
           </>
         )}
+        <Button variant="light" onClick={handleDelete} disabled={deleting} >
+          {deleting ? "Deleting" : <FiTrash className="h-6 w-6 text-red-500"/>}
+        </Button>
       </div>
+      <Toaster />
     </nav>
   );
 };
